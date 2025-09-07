@@ -1,15 +1,22 @@
 {
   "version": 2,
-  "name": "conflix-app",
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/server/server.js"
-    }
-  ],
+  "name": "conflix-backend",
+  "installCommand": "cd server && npm install",
+  "buildCommand": "cd server && npm run build",
+  "outputDirectory": "server",
   "functions": {
     "server/server.js": {
       "maxDuration": 30
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/server/server.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/server/server.js"
+    }
+  ]
 }
