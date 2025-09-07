@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path(.*)",
-      "destination": "https://following-claude-charlesxstorm-c20ba5bb.koyeb.app/api/:path"
+      "destination": "https://your-backend-deployment.vercel.app/api/:path"
     },
     {
       "source": "/(.*)",

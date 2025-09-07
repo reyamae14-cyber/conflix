@@ -2,7 +2,7 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 
 const mongoose = require("mongoose");
-const app = require("./app");
+const app = require("../app");
 
 const databaseConfig = {
   "<username>": process.env.USER,
