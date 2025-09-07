@@ -1,10 +1,10 @@
 export const accordion = [
   {
     id: 0,
-    header: "What is Conflix?",
+    header: "What is Zetflix?",
     body: (
       <>
-        Conflix is an open source extremely responsive streaming service project
+        Zetflix is an open source extremely responsive streaming service project
         created by{" "}
         <a
           className="text-blue-400 text-sm"
@@ -30,7 +30,7 @@ export const accordion = [
     header: "What features does Conflix have?",
     body: (
       <>
-        Conflix has lots of features similar to Netflix. Some of these features
+        Zetflix has lots of features similar to Netflix. Some of these features
         includes: <br />
         <br />
         - User signup and signin with validator, user logout. <br />
@@ -95,10 +95,10 @@ export const accordion = [
   },
   {
     id: 4,
-    header: "What can I watch on Conflix?",
+    header: "What can I watch on Zetflix?",
     body: (
       <>
-        Conflix has an extensive library of feature films, documentaries, TV
+        Zetflix has an extensive library of feature films, documentaries, TV
         shows, anime, award-winning movie originals, and more. Watch as much as
         you want, anytime you want.
       </>
@@ -106,7 +106,7 @@ export const accordion = [
   },
   {
     id: 5,
-    header: "Does Conflix have the kids experience?",
+    header: "Does Zetflix have the kids experience?",
     body: (
       <>
         The Conflix Kids experience is included in this project. This is one of

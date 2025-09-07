@@ -50,6 +50,8 @@ const IconButton = ({
         setAccountClick(false);
         return;
       }
+      // Set flag to indicate user has selected a profile
+      localStorage.setItem("hasSelectedProfile", "true");
       setAccountLoader(true);
       setAccountClick(true);
       setAddProfile(false);

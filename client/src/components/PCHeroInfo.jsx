@@ -19,7 +19,6 @@ const PCHeroInfo = ({
   top,
   itemHeight,
   itemWidth,
-  playHandler,
   setExpand,
   expand,
   movieType,
@@ -135,6 +134,7 @@ const PCHeroInfo = ({
                   id={$data.id}
                   movieType={movieType}
                   setTitle={()=> null}
+                  modalId={`heroinfo-${$data.id}-${movieType}`}
                 />
               )
           }
@@ -164,7 +164,6 @@ const PCHeroInfo = ({
                 volumeHandler={volumeHandler}
                 movie={$data}
                 watchListHandler={watchListHandler}
-                playHandler={playHandler}
                 cancelHandler={cancelHandler}
                 watchIcon={watchIcon}
                 rated={rated}

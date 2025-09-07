@@ -51,12 +51,8 @@ const MovieDetail = ({
     }
   };
 
-  const playHandler = () => {
-    dispatch(setIntro(true));
-    setNavView(false);
-    setAccountClick(false);
-    navigate("/browse");
-  };
+  // Play handler is now handled by the VideoModal component
+  // No need for navigation logic since modal opens on the same page
 
   //handle watchList logic
   const watchListHandler = () => {
@@ -119,8 +115,11 @@ const MovieDetail = ({
               {!isPC && (
                 <div className="flex justify-center items-center w-[100%] px-[4%] gap-[5%]">
                   <button
-                    onClick={playHandler}
-                    className="rounded-[4px] p-2 bg-white text-[1em] md:text-[1.5em] text-black font-[500] w-[50%] flex justify-center items-center gap-1 "
+                    className="play-modal-trigger rounded-[4px] p-2 bg-white text-[1em] md:text-[1.5em] text-black font-[500] w-[50%] flex justify-center items-center gap-1"
+                    data-type={$movieType}
+                    data-id={$data.id}
+                    data-season={$movieType === 'tv' ? '1' : undefined}
+                    data-episode={$movieType === 'tv' ? '1' : undefined}
                   >
                     <span>
                       <img

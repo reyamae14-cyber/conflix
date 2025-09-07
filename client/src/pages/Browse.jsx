@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import BrowseAdd from "./BrowseAdd";
 import { useSelector } from "react-redux";
 import AccountLoader from "../components/UI/AccountLoader";
-import IntroAnim from "../components/UI/ConflixIntroAnim/IntroAnim";
+
 import ManageProfilesIcons from "./ManageProfilesIcons";
 const LazyBrowseHome = lazy(() => import("./BrowseHome"));
 const LazyBrowseMovies = lazy(() => import("./BrowseMovies"));
@@ -24,6 +24,13 @@ const Browse = ({
   const { intro } = useSelector((state) => state.feature);
   const [accountLoaded, setAccountLoaded] = useState(false);
   const [profileIcons, setProfileIcons] = useState({state:false});
+  
+  // Check if user has selected a profile before
+  const hasSelectedProfile = localStorage.getItem("hasSelectedProfile") === "true";
+  const selectedProfile = JSON.parse(localStorage.getItem("Profile"));
+  
+  // Determine if we should show profile selection or main content
+  const shouldShowProfileSelection = !accountClick && (!hasSelectedProfile || !selectedProfile);
 
   const [timeOutID, setTimeoutID] = useState();
 
@@ -53,14 +60,9 @@ const Browse = ({
 
   return (
     <div>
-      {intro &&
-        loaded &&
-        ReactDOM.createPortal(
-          <IntroAnim timeOutID={timeOutID} setTimeoutID={setTimeoutID} />,
-          document.getElementById("portal")
-        )}
+      {/* Intro animation removed */}
 
-      {!accountClick &&
+      {shouldShowProfileSelection &&
         loaded &&
         data != null &&
         ReactDOM.createPortal(
@@ -101,7 +103,7 @@ const Browse = ({
           document.getElementById("portal")
         )}
 
-      {accountClick && loaded && (
+      {(accountClick || (hasSelectedProfile && selectedProfile && !shouldShowProfileSelection)) && loaded && (
         <Suspense
           fallback={
             <div className="absolute top-0 left-0 w-[100%] h-[100vh] bg-black ">

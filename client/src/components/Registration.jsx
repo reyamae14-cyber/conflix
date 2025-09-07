@@ -17,7 +17,7 @@ const Registration = () => {
           account
         </p>
         <p className="lg:text-center pt-2 text-lg">
-          Conflix is personalized for you.
+          Zetflix is personalized for you.
           <br />
           Create a password to watch on any
           <br />

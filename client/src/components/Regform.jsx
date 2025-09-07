@@ -24,16 +24,16 @@ const Regform = () => {
           name: "text-black text-[1.8em]"
         }}
         check={{
-          name: "Please do not email me Conflix special offers.",
+          name: "Please do not email me Zetflix special offers.",
           style: "my-4 text-sm",
           inputId: "singupPass"
         }}
         desc={{
           detail: (
             <>
-              This is a portfolio project, use a random email.
+              Enter your email.
               <br />
-              Do not enter sensitive data.{" "}
+              .{" "}
               <a
                 className="text-blue-600"
                 href="https://www.github.com/CharlesXstorm/netflixClone"

@@ -127,7 +127,7 @@ const ItemModal = ({
   };
 
   const playHandler = () => {
-    dispatch(setIntro(true));
+    // Removed setIntro(true) - no intro animation needed
     setNavView(false);
     setAccountClick(false);
     navigate("/browse");
@@ -341,6 +341,7 @@ const ItemModal = ({
                     id={movieID}
                     movieType={movieType}
                     setTitle={setTitleSrc}
+                    modalId={`modal-${movieID}-${movieType}`}
                   />
                 )
               }
@@ -410,8 +411,11 @@ const ItemModal = ({
                 <div className="flex justify-between">
                   <span className="flex gap-2">
                     <button
-                      onClick={playHandler}
-                      className="w-[2em] border rounded-[50%] bg-white p-[6px] flex items-center justify-center"
+                      className="play-modal-trigger w-[2em] border rounded-[50%] bg-white p-[6px] flex items-center justify-center"
+                      data-type={movieType}
+                      data-id={movieID}
+                      data-season={movieType === 'tv' ? '1' : undefined}
+                      data-episode={movieType === 'tv' ? '1' : undefined}
                     >
                       <img src="/images/play.svg" alt="buttons" />
                     </button>

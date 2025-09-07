@@ -1,0 +1,40 @@
+{
+  "name": "conflix",
+  "version": "1.0.0",
+  "description": "A responsive Netflix clone built with MERN stack",
+  "main": "server/server.js",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev": "cd server && npm run dev",
+    "start": "cd server && npm start",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "install-server": "cd server && npm install",
+    "install-all": "npm run install-client && npm run install-server",
+    "heroku-postbuild": "npm run install-all && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/conflix.git"
+  },
+  "keywords": [
+    "netflix",
+    "clone",
+    "streaming",
+    "react",
+    "nodejs",
+    "mongodb",
+    "mern",
+    "movies",
+    "entertainment"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/conflix/issues"
+  },
+  "homepage": "https://github.com/your-username/conflix#readme"
+}

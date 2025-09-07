@@ -9,7 +9,6 @@ const HeroInfo = ({
   movieType,
   movie,
   watchListHandler,
-  playHandler,
   cancelHandler,
   watchIcon,
   rated,
@@ -55,13 +54,11 @@ const HeroInfo = ({
         <div className="flex flex-row justify-between pointer-events-auto w-full">
           <div className="flex flex-row justify-between items-center gap-4 items-left">
             <button
-              onClick={() => {
-                if (cancelHandler) {
-                  cancelHandler();
-                }
-                playHandler();
-              }}
-              className="border p-2 px-4 rounded text-black bg-white flex align-center items-center gap-2 font-bold"
+              className="play-modal-trigger border p-2 px-4 rounded text-black bg-white flex align-center items-center gap-2 font-bold"
+              data-type={movieType}
+              data-id={movie.id}
+              data-season={movieType === 'tv' ? '1' : undefined}
+              data-episode={movieType === 'tv' ? '1' : undefined}
             >
               <span>
                 <img src="/images/play.svg" className="w-[1em]" />

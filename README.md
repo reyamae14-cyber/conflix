@@ -26,6 +26,7 @@
   <a href="#rocket-tools-heavy_plus_sign-technologies"><strong>Tools & Technologies</strong></a> ·
   <a href="#-screenshots"><strong>Screenshots</strong></a> ·
   <a href="#-getting-started"><strong>Getting Started</strong></a> ·
+  <a href="#-deployment"><strong>Deployment</strong></a> ·
   <a href="#white_check_mark-requirements"><strong>Requirements</strong></a> ·
   <a href="#-license"><strong>License</strong></a> ·
 </p>
@@ -294,6 +295,98 @@ TMDB_URL = https://api.themoviedb.org/3
 ```bash
   npm run dev
 ```
+
+<br/>
+
+## 🚀 Deployment
+
+### Deploy to Vercel
+
+This project is configured for easy deployment to Vercel with both frontend and backend.
+
+#### Prerequisites
+- [Vercel Account](https://vercel.com/)
+- [GitHub Account](https://github.com/)
+- MongoDB Atlas database (for production)
+
+#### Step 1: Prepare Your Repository
+1. Push your code to a GitHub repository
+2. Ensure all files are committed including the new `vercel.json` configuration
+
+#### Step 2: Environment Variables Setup
+
+**For the Client (.env):**
+```bash
+VITE_API_BASE_URL=https://your-vercel-app.vercel.app
+VITE_TMDB_API_KEY=your_tmdb_api_key
+VITE_TMDB_BASE_URL=https://api.themoviedb.org/3
+VITE_APP_NAME=Conflix
+VITE_APP_VERSION=1.0.0
+```
+
+**For the Server (.env):**
+```bash
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/conflix
+JWT_SECRET=your_super_secret_jwt_key
+JWT_EXPIRES_IN=7d
+PORT=5000
+NODE_ENV=production
+CLIENT_URL=https://your-vercel-app.vercel.app
+TMDB_API_KEY=your_tmdb_api_key
+COOKIE_SECRET=your_cookie_secret
+```
+
+#### Step 3: Deploy to Vercel
+
+1. **Connect to Vercel:**
+   - Go to [Vercel Dashboard](https://vercel.com/dashboard)
+   - Click "New Project"
+   - Import your GitHub repository
+
+2. **Configure Build Settings:**
+   - Framework Preset: `Other`
+   - Root Directory: `./` (leave empty)
+   - Build Command: `cd client && npm run build`
+   - Output Directory: `client/dist`
+
+3. **Add Environment Variables:**
+   - In Vercel dashboard, go to your project settings
+   - Add all the environment variables listed above
+   - Make sure to set `NODE_ENV=production`
+
+4. **Deploy:**
+   - Click "Deploy"
+   - Vercel will automatically build and deploy both frontend and backend
+
+#### Step 4: Update CORS Configuration
+
+After deployment, update the CORS configuration in `server/app.js`:
+```javascript
+origin: process.env.NODE_ENV === 'production' 
+  ? [process.env.CLIENT_URL, 'https://your-actual-vercel-url.vercel.app'] 
+  : ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:4173'],
+```
+
+#### Step 5: Database Setup
+
+1. **MongoDB Atlas:**
+   - Create a MongoDB Atlas account
+   - Create a new cluster
+   - Add database user and whitelist IP addresses (0.0.0.0/0 for Vercel)
+   - Get your connection string and add it to Vercel environment variables
+
+#### Troubleshooting
+
+- **Build Failures:** Check the build logs in Vercel dashboard
+- **API Issues:** Ensure environment variables are set correctly
+- **CORS Errors:** Update the CORS configuration with your actual Vercel URL
+- **Database Connection:** Verify MongoDB Atlas connection string and IP whitelist
+
+### Alternative Deployment Options
+
+- **Netlify:** For frontend only (requires separate backend deployment)
+- **Railway:** For full-stack deployment
+- **Heroku:** For full-stack deployment (with some configuration changes)
 
 <br/>
 

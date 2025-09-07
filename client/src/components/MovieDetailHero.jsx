@@ -81,6 +81,7 @@ const MovieDetailHero = ({
         id={id}
         movieType={movieType}
         setTitle={setTitle}
+        isMainTrailer={true}
       />
     </div>
   );

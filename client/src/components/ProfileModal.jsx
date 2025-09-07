@@ -25,6 +25,7 @@ const Button = ({
     if (id != profile.id) {
       dispatch(setProfile(item));
       localStorage.setItem("Profile", JSON.stringify(item));
+      localStorage.setItem("hasSelectedProfile", "true");
       
       setAccountLoader(true);
       setAccountClick(true);
@@ -76,6 +77,7 @@ const ProfileModal = ({
   const logoutHandler = () => {
     logout();
     localStorage.clear();
+    localStorage.removeItem("hasSelectedProfile");
     setAccountClick(false);
     navigate("/logout");
   };
@@ -149,7 +151,7 @@ const ProfileModal = ({
             onClick={logoutHandler}
             className="border-t-[1px] hover:underline items-center justify-center flex bg-[rgb(10,10,10)] py-4 "
           >
-            <span className="text-[0.8em]">Sign out of Conflix</span>
+            <span className="text-[0.8em]">Sign out to Zetflix</span>
           </button>
         </div>
       </div>

@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ReactPlayer from "react-player/youtube";
+import audioManager from "../utils/AudioManager";
 
 const VideoPlayer = ({
   volume,
@@ -11,7 +12,9 @@ const VideoPlayer = ({
   playerRef,
   id,
   movieType,
-  setTitle
+  setTitle,
+  isMainTrailer = false,
+  modalId = null
 }) => {
   const [key, setKey] = useState();
 
@@ -100,6 +103,43 @@ const VideoPlayer = ({
     }
   }, []);
 
+  // Register with AudioManager
+  useEffect(() => {
+    if (isMainTrailer && playerRef) {
+      audioManager.registerMainTrailer(playerRef, setPlaying);
+    } else if (modalId && playerRef) {
+      audioManager.registerModalTrailer(modalId, playerRef, setPlaying);
+    }
+
+    return () => {
+      if (modalId) {
+        audioManager.unregisterModalTrailer(modalId);
+      }
+    };
+  }, [isMainTrailer, modalId, playerRef, setPlaying]);
+
+  // Handle playing state changes
+  useEffect(() => {
+    if (isMainTrailer) {
+      audioManager.updateMainTrailerStatus(playing);
+    } else if (modalId) {
+      audioManager.updateModalTrailerStatus(modalId, playing);
+    }
+  }, [playing, isMainTrailer, modalId]);
+
+  // Custom play handler that stops other audio
+  const handlePlay = () => {
+    if (isMainTrailer) {
+      audioManager.playMainTrailer();
+    } else if (modalId) {
+      audioManager.playModalTrailer(modalId);
+    } else {
+      // For non-registered players, just stop all audio and play
+      audioManager.stopAllAudio();
+      setPlaying(true);
+    }
+  };
+
   return (
     <div className="player-wrapper h-full">
       <ReactPlayer
@@ -112,6 +152,7 @@ const VideoPlayer = ({
         height="100%"
         width="100%"
         onReady={readyHandler}
+        onPlay={handlePlay}
         onPause={() => setPlaying(false)}
         progressInterval={1000}
         onProgress={progressHandler}

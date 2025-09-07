@@ -25,33 +25,40 @@ export const deviceInfoSlice = createSlice({
     //   }
     // },
     setDeviceInfo: (state, action) => {
-      switch (action.payload.width > 0) {
-        case action.payload.width <= 500:
-          return {
-            isMobile: true,
-            isTablet: false,
-            isPC: false,
-            dvSize: action.payload
-          };
-        case (action.payload.width > 500 && action.payload.width < 1024) ||
-          (action.payload.width >= 1024 && action.payload.height > 1360):
-          return {
-            isMobile: false,
-            isTablet: true,
-            isPC: false,
-            dvSize: action.payload
-          };
-
-        case action.payload.width >= 1024:
-          return {
-            isMobile: false,
-            isTablet: false,
-            isPC: true,
-            dvSize: action.payload
-          };
-        default:
-          return;
+      const { width, height } = action.payload;
+      
+      // Mobile: width <= 768px
+      if (width <= 768) {
+        return {
+          isMobile: true,
+          isTablet: false,
+          isPC: false,
+          dvSize: action.payload
+        };
       }
+      
+      // Tablet: width between 769px and 1024px, or touch devices with specific aspect ratios
+      if (width > 768 && width <= 1024) {
+        return {
+          isMobile: false,
+          isTablet: true,
+          isPC: false,
+          dvSize: action.payload
+        };
+      }
+      
+      // PC/Desktop: width > 1024px
+      if (width > 1024) {
+        return {
+          isMobile: false,
+          isTablet: false,
+          isPC: true,
+          dvSize: action.payload
+        };
+      }
+      
+      // Default fallback
+      return state;
     },
     setBodyHeight: (state, action) => {
       state.bodyHeight = action.payload;

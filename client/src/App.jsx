@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setDeviceInfo } from "./utils/deviceInfoSlice.js";
+import VideoModal from "./components/VideoModal";
 
 import Home from "./pages/Home";
 import Signin from "./pages/Signin";
@@ -59,7 +60,8 @@ function App() {
   }, []);
 
   return (
-    <Routes>
+    <>
+      <Routes>
       <Route index element={<Home />} />
       <Route path="login" element={<Signin />} />
       <Route path="signup" element={<Signup setEmail={setEmail} />}>
@@ -166,6 +168,8 @@ function App() {
 
       <Route path="*" element={<Error />} />
     </Routes>
+    <VideoModal />
+    </>
   );
 }
 

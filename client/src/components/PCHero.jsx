@@ -91,18 +91,14 @@ const PCHero = ({
     }
   };
 
-  const playHandler = () => {
-    dispatch(setIntro(true));
-    setNavView(false);
-    setAccountClick(false);
-    navigate("/browse");
-  };
+  // Play handler is now handled by the VideoModal component
+  // No need for navigation logic since modal opens on the same page
 
   const moreInfoHandler = ()=> {
     setPlaying(false);
-    setExpand(true)
+    setExpand(true);
     dispatch(setOverflow("hidden"));
-  }
+  };
   useEffect(() => {
     if (playing) {
       const timeOut = setTimeout(() => {
@@ -134,7 +130,6 @@ const PCHero = ({
             itemWidth={Math.floor(
               itemRef.current.getBoundingClientRect().width
             )}
-            playHandler={playHandler}
             movieType={movieType}
             $data={$data}
             title={title}
@@ -204,8 +199,11 @@ const PCHero = ({
           <div className="flex flex-row justify-between pointer-events-auto">
             <div className="flex flex-row justify-between gap-4 items-left">
               <button
-                onClick={playHandler}
-                className="border p-2 px-4 rounded text-black bg-white flex align-center items-center gap-2 font-bold"
+                className="play-modal-trigger border p-2 px-4 rounded text-black bg-white flex align-center items-center gap-2 font-bold"
+                data-type={movieType}
+                data-id={$data.id}
+                data-season={movieType === 'tv' ? '1' : undefined}
+                data-episode={movieType === 'tv' ? '1' : undefined}
               >
                 <span>
                   <img src="/images/play.svg" className="w-[1em]" />
@@ -244,6 +242,7 @@ const PCHero = ({
         playerRef={playerRef}
         id={$data.id}
         movieType={movieType}
+        isMainTrailer={true}
       />
     </div>
   );
